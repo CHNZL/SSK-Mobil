@@ -1,0 +1,6 @@
+{
+  "name": "Okul Paylaşım",
+  "description": "Öğretmenler için okul içi etkinlik görsel ve belge paylaşım ağı uygulaması",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
