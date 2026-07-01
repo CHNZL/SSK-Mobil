@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v4
@@ -51,3 +53,25 @@ jobs:
         name: school-share-apk
         path: app/build/outputs/apk/debug/app-debug.apk
         if-no-files-found: error
+
+    - name: Create or Update GitHub Release
+      if: github.event_name == 'push'
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v1.0.0
+        name: "Okul Paylaşım v1.0.0 (Otomatik Yapılandırma)"
+        body: |
+          ### Okul Paylaşım Otomatik Yapılandırma Sürümü 🚀
+          
+          Bu sürüm, GitHub Actions CI/CD hattı tarafından otomatik olarak üretilmiştir.
+          
+          **Yenilikler:**
+          • Otomatik güncelleme sistemi entegrasyonu.
+          • GitHub Actions CI/CD otomatik sürümleme sistemi.
+          • Performans ve kararlılık iyileştirmeleri.
+        draft: false
+        prerelease: false
+        files: app/build/outputs/apk/debug/app-debug.apk
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
